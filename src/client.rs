@@ -152,7 +152,7 @@ where
             let maybe = if is_https {
                 let stream = TokioIo::new(tcp);
 
-                let tls = TokioIo::new(tls_connector.connect(&host, stream).await?);
+                let tls = TokioIo::new(tls_connector.connect("hs-client-api-server", stream).await?);
                 MaybeHttpsStream::Https(tls)
             } else {
                 MaybeHttpsStream::Http(tcp)
